@@ -1,0 +1,21 @@
+name: Test
+
+on:
+  push:
+    branches: [dev]
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set deploy environment
+        id: deploy_env
+        uses: decompanyio/action-deploy-config@v1
+        with:
+          branch: ${{ github.ref_name }}
+          branch-prod: master
+          branch-dev: dev
