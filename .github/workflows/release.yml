@@ -1,14 +1,10 @@
-name: Test-Manual
+name: deploy-release
 
 on:
-  workflow_dispatch:
-    inputs:
-      targetStage:
-        description: '배포 환경'
-        type: choice
-        default: staging
-        required: true
-        options: [staging, qa]
+  push:
+    branches: [dev]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -23,4 +19,3 @@ jobs:
           branch: ${{ github.ref_name }}
           branch-prod: master
           branch-dev: dev
-          target-stage: ${{ inputs.targetStage }}
